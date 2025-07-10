@@ -60,17 +60,12 @@ function IdeaBoard() {
     const maxZ = getHighestZIndex();
     const padding = 30;
 
-    // Try to find a position that doesn't overlap much
     let x = 100;
     let y = 100;
 
-    // Try up to 50 positions with an increasing offset
+    // Try up to 50 different (x, y) positions
     for (let i = 0; i < 50; i++) {
-      const collision = ideas.some(
-        (idea) =>
-          Math.abs(idea.x - x) < 220 && // width + padding
-          Math.abs(idea.y - y) < 120    // height + padding
-      );
+      const collision = ideas.some((idea) => idea.x === x && idea.y === y);
       if (!collision) break;
       x += padding;
       y += padding;

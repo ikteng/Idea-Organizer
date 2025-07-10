@@ -3,9 +3,9 @@
   z-index: 1;
   width: 180px;
   min-height: 100px;
-  color: #333;
   padding: 10px;
   border-radius: 10px;
+  border: 1px solid #dddd;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
@@ -54,6 +54,7 @@
 
 .idea-display {
   font-family: Helvetica, Arial, sans-serif;
+  font-size: 1.2em;
   white-space: pre-wrap;
   word-wrap: break-word;
   cursor: text;
@@ -66,7 +67,6 @@
   outline: none;
   resize: none;
   background: transparent;
-  font-size: 1em;
   font-family: inherit;
   color: inherit;
 }
