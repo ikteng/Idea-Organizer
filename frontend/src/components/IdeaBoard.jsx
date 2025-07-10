@@ -57,17 +57,36 @@ function IdeaBoard() {
   };
 
   const handleAddCard = () => {
-    const maxZ = getHighestZIndex(); // get the current highest zIndex
+    const maxZ = getHighestZIndex();
+    const padding = 30;
+
+    // Try to find a position that doesn't overlap much
+    let x = 100;
+    let y = 100;
+
+    // Try up to 50 positions with an increasing offset
+    for (let i = 0; i < 50; i++) {
+      const collision = ideas.some(
+        (idea) =>
+          Math.abs(idea.x - x) < 220 && // width + padding
+          Math.abs(idea.y - y) < 120    // height + padding
+      );
+      if (!collision) break;
+      x += padding;
+      y += padding;
+    }
+
     const newCard = {
       id: `temp-${cardIdCounter++}`,
       text: "",
-      x: 200,
-      y: 200,
+      x,
+      y,
       zIndex: maxZ + 1,
       width: 200,
       height: 100,
       isEditing: true,
     };
+
     setIdeas((prevIdeas) => [...prevIdeas, newCard]);
   };
 
@@ -103,9 +122,9 @@ function IdeaBoard() {
           + Add Card
         </button>
 
-        <button className="add-btn" onClick={handleAddMediaCard}>
+        {/* <button className="add-btn" onClick={handleAddMediaCard}>
           + Add Media
-        </button>
+        </button> */}
 
       </div>
     </div>
