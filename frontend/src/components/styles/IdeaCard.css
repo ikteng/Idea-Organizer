@@ -67,7 +67,8 @@
   outline: none;
   resize: none;
   background: transparent;
-  font-family: inherit;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 1.2em;
   color: inherit;
 }
 

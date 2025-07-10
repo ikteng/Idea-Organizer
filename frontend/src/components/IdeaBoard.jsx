@@ -79,7 +79,7 @@ function IdeaBoard() {
       zIndex: maxZ + 1,
       width: 200,
       height: 100,
-      isEditing: true,
+      isEditing: false,
     };
 
     setIdeas((prevIdeas) => [...prevIdeas, newCard]);

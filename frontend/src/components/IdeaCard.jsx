@@ -144,7 +144,7 @@ function IdeaCard({ idea, setIdeas, getHighestZIndex }) {
         zIndex: idea.zIndex,
         background: getColorForCluster(idea.cluster),
       }}
-      onMouseDown={!idea.isEditing ? handleMouseDown : undefined}
+      onMouseDown={handleMouseDown}
     >
       <button className="delete-btn" onClick={handleDelete}>
         ×
