@@ -9,8 +9,7 @@ CORS(app)
 
 DB_PATH = "./backend/database.db"
 print("⏳ [Startup] Initializing SentenceTransformer model...")
-# model = SentenceTransformer("all-MiniLM-L6-v2")
-model = SentenceTransformer("paraphrase-MiniLM-L3-v2")
+model = SentenceTransformer("all-MiniLM-L6-v2")
 print("✅ [Startup] Model loaded successfully.")
 
 def init_db():
