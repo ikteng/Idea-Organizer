@@ -57,11 +57,13 @@ function IdeaBoard() {
   };
 
   const handleAddCard = () => {
+    const maxZ = getHighestZIndex(); // get the current highest zIndex
     const newCard = {
       id: `temp-${cardIdCounter++}`,
       text: "",
       x: 200,
       y: 200,
+      zIndex: maxZ + 1,
       width: 200,
       height: 100,
       isEditing: true,
@@ -100,6 +102,11 @@ function IdeaBoard() {
         <button className="add-btn" onClick={handleAddCard}>
           + Add Card
         </button>
+
+        <button className="add-btn" onClick={handleAddMediaCard}>
+          + Add Media
+        </button>
+
       </div>
     </div>
   );
