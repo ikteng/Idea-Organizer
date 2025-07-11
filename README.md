@@ -1,26 +1,32 @@
 # Idea-Organizer
 
 💡 “Idea Organizer” – Smart Thought Whiteboard App
-🧠 Problem:
-People often jot down thoughts in notes, docs, or voice memos—but rarely revisit, categorize, or expand them. Ideas remain shallow, disorganized, and forgotten.
+Problem:
+People often jot down thoughts in notes—but rarely revisit, categorize, or expand them. Ideas remain shallow, disorganized, and forgotten.
 
-✅ Key Features
+🌟 Features
 1. Visual Idea Board
-Like a minimalist whiteboard (think Miro meets Notion).
+- minimalist whiteboard
+- Users can add "idea cards" with text.
+- Add, move, resize idea cards freely
 
-Users can add "idea cards" with text.
+2. Idea Clustering / Related Detection
+- Automatically detect similar or duplicate ideas using NLP
+- Cluster related ideas with shared color themes
+- Uses cosine similarity or transformer embeddings on card content
 
-Cards can be freely arranged in a grid or clustered view.
+3. Search & Filter
+- Keyword search to highlight and filter cards
+- Can combine with cluster filters for grouped exploration
 
-3. Idea Clustering / Related Detection
-Auto-detect similar or duplicate ideas.
-
-Show links between related cards (“this seems related to…”).
-
-Graph view mode for seeing idea clusters.
-
-
-6. Search & Filter
-Search by keyword, category, or tag.
-
-Filter ideas by relatedness or development stage.
+Improvements:
+- Media Support
+    - Drag-and-drop image uploads to cards
+    - Add YouTube/video links or local file upload
+    - Cards support mixed content (text + media)
+- Database Upgrade
+    - Moved backend from SQLite ➝ PostgreSQL
+    - Allows scalable, structured storage of ideas, media, and connections
+- Graph Relationships
+    - Connect idea cards visually with lines and arrows
+    - Drag-to-connect interface for forming thought relationships

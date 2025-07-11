@@ -13,6 +13,7 @@ function IdeaBoard() {
   const [highlightedId, setHighlightedId] = useState(null);
 
   useEffect(() => {
+     // Load ideas
     axios.get("http://localhost:5000/api/ideas").then((res) => {
       try {
         setIdeas(
@@ -116,10 +117,6 @@ function IdeaBoard() {
         <button className="add-btn" onClick={handleAddCard}>
           + Add Card
         </button>
-
-        {/* <button className="add-btn" onClick={handleAddMediaCard}>
-          + Add Media
-        </button> */}
 
       </div>
     </div>
