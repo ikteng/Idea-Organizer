@@ -3,6 +3,7 @@ import axios from "axios";
 import "./styles/IdeaBoard.css";
 import TopToolbar from "./TopToolbar";
 import IdeaCard from "./IdeaCard";
+import ConnectionLayer from "./ConnectionLayer";
 
 let cardIdCounter = 1;
 
@@ -11,9 +12,10 @@ function IdeaBoard() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [highlightedId, setHighlightedId] = useState(null);
+  const [connections, setConnections] = useState([]);
 
   useEffect(() => {
-     // Load ideas
+    // Load ideas
     axios.get("http://localhost:5000/api/ideas").then((res) => {
       try {
         setIdeas(
@@ -25,6 +27,23 @@ function IdeaBoard() {
             width: idea.width || 200,
             height: idea.height || 100,
             isEditing: false,
+          }))
+        );
+      } catch (err) {
+        console.error("Failed to process ideas:", err);
+      }
+    });
+
+    // Load connections
+     axios.get("http://localhost:5000/api/connections").then((res) => {
+      try {
+        setConnections(
+          res.data.map((conn) => ({
+            id: conn.id,
+            fromId: conn.source_id,
+            toId: conn.target_id,
+            fromPos: conn.source_point,
+            toPos: conn.target_point,
           }))
         );
       } catch (err) {
@@ -111,13 +130,19 @@ function IdeaBoard() {
             getHighestZIndex={getHighestZIndex}
           />
         ))}
+
+        <ConnectionLayer
+          ideas={ideas}
+          connections={connections}
+          setConnections={setConnections}
+        />
+
       </div>
 
       <div className="bottom-toolbar">
         <button className="add-btn" onClick={handleAddCard}>
           + Add Card
         </button>
-
       </div>
     </div>
   );

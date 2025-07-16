@@ -25,6 +25,16 @@ def init_db():
             width INTEGER DEFAULT 200,
             height INTEGER DEFAULT 100
         )""")
+
+        c.execute("""CREATE TABLE IF NOT EXISTS connections (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            source_id INTEGER NOT NULL,
+            target_id INTEGER NOT NULL,
+            source_point TEXT NOT NULL,
+            target_point TEXT NOT NULL,
+            FOREIGN KEY(source_id) REFERENCES ideas(id),
+            FOREIGN KEY(target_id) REFERENCES ideas(id)
+        )""")
         conn.commit()
     print("✅ [Database] Database ready.")
 
@@ -115,6 +125,48 @@ def delete_idea(idea_id):
         c.execute("DELETE FROM ideas WHERE id = ?", (idea_id,))
         conn.commit()
     return jsonify({"message": "Idea deleted"}), 200
+
+@app.route("/api/connections", methods=["POST"])
+def add_connection():
+    print("Adding a connection...")
+    data = request.get_json()
+    source_id = data.get("fromId")
+    target_id = data.get("toId")
+    source_point = data.get("fromPos")
+    target_point = data.get("toPos")
+
+    if not all([source_id, target_id, source_point, target_point]):
+        return jsonify({"error": "Missing connection data"}), 400
+
+    with sqlite3.connect(DB_PATH) as conn:
+        c = conn.cursor()
+        c.execute("""
+            INSERT INTO connections (source_id, target_id, source_point, target_point)
+            VALUES (?, ?, ?, ?)
+        """, (source_id, target_id, source_point, target_point))
+        conn.commit()
+        new_id = c.lastrowid
+
+    return jsonify({"message": "Connection saved", "id": new_id}), 201
+
+@app.route("/api/connections", methods=["GET"])
+def get_connections():
+    print("Getting connections...")
+    with sqlite3.connect(DB_PATH) as conn:
+        conn.row_factory = sqlite3.Row
+        c = conn.cursor()
+        c.execute("SELECT * FROM connections")
+        rows = c.fetchall()
+        return jsonify([dict(row) for row in rows])
+
+@app.route("/api/connections/<int:connection_id>", methods=["DELETE"])
+def delete_connection(connection_id):
+    print(f"Deleting connection {connection_id}...")
+    with sqlite3.connect(DB_PATH) as conn:
+        c = conn.cursor()
+        c.execute("DELETE FROM connections WHERE id = ?", (connection_id,))
+        conn.commit()
+    return jsonify({"message": "Connection deleted"}), 200
 
 if __name__ == "__main__":
     init_db()

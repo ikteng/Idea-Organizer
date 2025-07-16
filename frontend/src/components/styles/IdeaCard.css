@@ -26,6 +26,37 @@
   user-select: none; 
 }
 
+.connection-point {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #555;
+  border-radius: 50%;
+  cursor: crosshair;
+  z-index: 10;
+  user-select: none; 
+}
+.connection-point.top {
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.connection-point.right {
+  right: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.connection-point.bottom {
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.connection-point.left {
+  left: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 @keyframes pulse-outline {
   0% {
     outline-color: #1976d2;

@@ -135,6 +135,7 @@ function IdeaCard({ idea, setIdeas, getHighestZIndex }) {
 
   return (
     <div
+      data-id={idea.id}
       className={`idea-card ${dragging ? "draggable" : ""}`}
       style={{
         left: idea.x,
@@ -149,6 +150,11 @@ function IdeaCard({ idea, setIdeas, getHighestZIndex }) {
       <button className="delete-btn" onClick={handleDelete}>
         ×
       </button>
+
+    <div className="connection-point top"    data-position="top"    />
+    <div className="connection-point right"  data-position="right"  />
+    <div className="connection-point bottom" data-position="bottom" />
+    <div className="connection-point left"   data-position="left"   />
 
       <div
         className="resize-handle"
